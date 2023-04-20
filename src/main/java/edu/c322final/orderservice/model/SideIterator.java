@@ -15,7 +15,8 @@ public class SideIterator implements Iterator {
     }
     public Side next() {
         if (hasNext()) {
-            return sides.get(index);
+            index+=1;
+            return sides.get(index-1);
         }
         return null;
     }

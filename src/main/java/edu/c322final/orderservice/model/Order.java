@@ -10,14 +10,48 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int customerId;
-    @OneToOne(cascade = CascadeType.ALL)
-    private ConcreteSandwich sandwich;
+   private int turkeyCount;
+   private int hamCount;
+   private int avocadoCount;
     private double total;
+
+
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Side> sides;
-    public SideIterator getIterator() {
-        return new SideIterator(sides);
+    private List<SideModel> sides;
+    public int getTurkeyCount() {
+        return turkeyCount;
     }
+
+    public void setTurkeyCount(int turkeyCount) {
+        this.turkeyCount = turkeyCount;
+    }
+
+    public List<SideModel> getSides() {
+        return sides;
+    }
+
+    public void setSides(List<SideModel> sides) {
+        this.sides = sides;
+    }
+
+    public int getHamCount() {
+        return hamCount;
+    }
+
+
+
+    public void setHamCount(int hamCount) {
+        this.hamCount = hamCount;
+    }
+
+    public int getAvocadoCount() {
+        return avocadoCount;
+    }
+
+    public void setAvocadoCount(int avocadoCount) {
+        this.avocadoCount = avocadoCount;
+    }
+
 
     public int getId() {
         return id;
@@ -35,13 +69,6 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public ConcreteSandwich getSandwich() {
-        return sandwich;
-    }
-
-    public void setSandwich(ConcreteSandwich sandwich) {
-        this.sandwich = sandwich;
-    }
 
     public double getTotal() {
         return total;
@@ -51,11 +78,5 @@ public class Order {
         this.total = total;
     }
 
-    public List<Side> getSides() {
-        return sides;
-    }
 
-    public void setSides(List<Side> sides) {
-        this.sides = sides;
-    }
 }

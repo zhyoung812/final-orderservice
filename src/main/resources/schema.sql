@@ -1,1 +1,1 @@
-create schema if not exists reorder
+create schema if not exists sandwichorders
