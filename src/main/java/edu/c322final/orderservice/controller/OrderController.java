@@ -3,10 +3,9 @@ package edu.c322final.orderservice.controller;
 import edu.c322final.orderservice.model.Order;
 import edu.c322final.orderservice.model.Sandwich;
 import edu.c322final.orderservice.repository.OrderRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -15,9 +14,18 @@ public class OrderController {
     public OrderController(OrderRepository repository) {
         this.repository = repository;
     }
-    @PostMapping()
+    @GetMapping("/{id}")
+    public Order findById(@PathVariable int id) {
+        return repository.findById(id).get();
+    }
+    @PostMapping
     public int create(@RequestBody Order order) {
         Order newOrder = repository.save(order);
         return newOrder.getId();
+    }
+    @GetMapping("/{id}")
+    public int reorder(@PathVariable int id) {
+        Order order = findById(id);
+        return create(order);
     }
 }
