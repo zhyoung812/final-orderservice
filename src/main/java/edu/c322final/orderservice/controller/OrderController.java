@@ -15,22 +15,22 @@ public class OrderController {
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
-
+@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
         return orderRepository.getReferenceById(id);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/customer/{id}")
     public List<Order> getOrderbyCustomerId(@PathVariable int id) {
         return orderRepository.findOrderByCustomerId(id);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public int createOrder(@RequestBody Order order) {
         double total = 0;
@@ -77,7 +77,7 @@ public class OrderController {
         return order1.getId();
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/reorder/{id}")
     public int reorder(@PathVariable int id) {
         Order order = orderRepository.getReferenceById(id);
