@@ -16,6 +16,10 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
+    @GetMapping
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
 
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
@@ -50,13 +54,11 @@ public class OrderController {
             Side side;
             if (sideModels.get(i).getType().equals("Drink")) {
                 side = new Drink(sideModels.get(i).getName(),sideModels.get(i).getSize());
-            } else if (sideModels.get(i).getType().equals("Chips")) {
+            } else {
 
                 side = new Chips(sideModels.get(i).getName());
             }
-            else {
-                side = new Chips("BAD");
-            }
+
             sideModels.get(i).setPrice(side.getPrice());
             sideList.add(side);
 
@@ -76,7 +78,36 @@ public class OrderController {
     }
 
 
+    @PostMapping("/reorder/{id}")
+    public int reorder(@PathVariable int id) {
+        Order order = orderRepository.getReferenceById(id);
 
+
+        Order newOrder = new Order();
+        newOrder.setCustomerId(order.getCustomerId());
+        newOrder.setTotal(order.getTotal());
+        newOrder.setAvocadoCount(order.getAvocadoCount());
+        newOrder.setHamCount(order.getHamCount());
+        newOrder.setTurkeyCount(order.getTurkeyCount());
+        List<SideModel> sides = order.getSides();
+        List<SideModel> newSides = new ArrayList<>();
+        for (int i = 0; i< sides.size(); i++) {
+            SideModel newModel = new SideModel();
+            newModel.setSize(sides.get(i).getSize());
+            newModel.setOrder(newOrder);
+            newModel.setName(sides.get(i).getName());
+            newModel.setType(sides.get(i).getType());
+            newModel.setPrice(sides.get(i).getPrice());
+            newSides.add(newModel);
+        }
+        newOrder.setSides(newSides);
+
+
+        newOrder = orderRepository.save(newOrder);
+
+        return newOrder.getId();
+
+    }
 
 
 

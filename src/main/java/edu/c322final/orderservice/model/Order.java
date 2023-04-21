@@ -14,7 +14,7 @@ public class Order {
    private int hamCount;
    private int avocadoCount;
     private double total;
-
+    private String vegetables;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<SideModel> sides;
@@ -78,5 +78,11 @@ public class Order {
         this.total = total;
     }
 
+    public String getVegetables() {
+        return vegetables;
+    }
 
+    public void setVegetables(String vegetables) {
+        this.vegetables = vegetables;
+    }
 }
