@@ -23,12 +23,22 @@ public class OrderController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
-        return orderRepository.getReferenceById(id);
+        Order order= orderRepository.getReferenceById(id);
+        if (order.equals(null)) {
+            throw new IllegalStateException("Id not found");
+        } else {
+            return order;
+        }
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/customer/{id}")
     public List<Order> getOrderbyCustomerId(@PathVariable int id) {
-        return orderRepository.findOrderByCustomerId(id);
+        List<Order> orders = orderRepository.findOrderByCustomerId(id);
+        if (orders.isEmpty()) {
+            throw new IllegalStateException("Id not found");
+        } else {
+            return orders;
+        }
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
@@ -89,6 +99,8 @@ public class OrderController {
         newOrder.setAvocadoCount(order.getAvocadoCount());
         newOrder.setHamCount(order.getHamCount());
         newOrder.setTurkeyCount(order.getTurkeyCount());
+        newOrder.setBread(order.getBread());
+        newOrder.setCheese(order.getCheese());
         List<SideModel> sides = order.getSides();
         List<SideModel> newSides = new ArrayList<>();
         for (int i = 0; i< sides.size(); i++) {
