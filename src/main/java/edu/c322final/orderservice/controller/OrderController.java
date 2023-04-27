@@ -91,7 +91,7 @@ public class OrderController {
     @CrossOrigin(origins = CORS_VALIDATION_URL)
     @PostMapping("/reorder/{id}")
     public int reorder(@PathVariable int id) {
-        Order order = orderRepository.getReferenceById(id);
+        Order order = orderRepository.findById(id).get();
 
 
         Order newOrder = new Order();
