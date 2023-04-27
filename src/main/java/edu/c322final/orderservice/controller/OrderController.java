@@ -16,12 +16,12 @@ public class OrderController {
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
-    @CrossOrigin(origins = CORS_VALIDATION_RECEIPT_URL)
+    @CrossOrigin(origins = CORS_VALIDATION_URL)
     @GetMapping
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-    @CrossOrigin(origins = CORS_VALIDATION_URL)
+    @CrossOrigin(origins = CORS_VALIDATION_RECEIPT_URL)
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
         Order order= orderRepository.getReferenceById(id);
