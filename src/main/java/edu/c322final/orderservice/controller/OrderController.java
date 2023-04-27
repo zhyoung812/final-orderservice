@@ -102,6 +102,7 @@ public class OrderController {
         newOrder.setTurkeyCount(order.getTurkeyCount());
         newOrder.setBread(order.getBread());
         newOrder.setCheese(order.getCheese());
+        newOrder.setVegetables(order.getVegetables());
         List<SideModel> sides = order.getSides();
         List<SideModel> newSides = new ArrayList<>();
         for (int i = 0; i< sides.size(); i++) {
