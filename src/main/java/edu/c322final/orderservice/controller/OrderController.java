@@ -11,16 +11,17 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     public OrderRepository orderRepository;
-
+    public final String CORS_VALIDATION_URL = "http://localhost:3000";
+    public final String CORS_VALIDATION_RECEIPT_URL = "http://localhost:8092";
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
-@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = CORS_VALIDATION_RECEIPT_URL)
     @GetMapping
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = CORS_VALIDATION_URL)
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
         Order order= orderRepository.getReferenceById(id);
@@ -30,7 +31,7 @@ public class OrderController {
             return order;
         }
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins =CORS_VALIDATION_URL)
     @GetMapping("/customer/{id}")
     public List<Order> getOrderbyCustomerId(@PathVariable int id) {
         List<Order> orders = orderRepository.findOrderByCustomerId(id);
@@ -40,7 +41,7 @@ public class OrderController {
             return orders;
         }
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = CORS_VALIDATION_URL)
     @PostMapping
     public int createOrder(@RequestBody Order order) {
         double total = 0;
@@ -87,7 +88,7 @@ public class OrderController {
         return order1.getId();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = CORS_VALIDATION_URL)
     @PostMapping("/reorder/{id}")
     public int reorder(@PathVariable int id) {
         Order order = orderRepository.getReferenceById(id);
