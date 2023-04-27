@@ -115,7 +115,6 @@ public class OrderController {
         }
         newOrder.setSides(newSides);
 
-
         newOrder = orderRepository.save(newOrder);
 
         return newOrder.getId();
