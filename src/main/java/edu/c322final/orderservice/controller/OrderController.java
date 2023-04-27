@@ -11,8 +11,8 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     public OrderRepository orderRepository;
-    public final String CORS_VALIDATION_URL = "http://localhost:3000";
-    public final String CORS_VALIDATION_RECEIPT_URL = "http://localhost:8092";
+    public final String CORS_VALIDATION_URL = "https://final-frontend-eta.vercel.app/";
+    public final String CORS_VALIDATION_RECEIPT_URL = "https://final-receiptservice-production.up.railway.app";
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
