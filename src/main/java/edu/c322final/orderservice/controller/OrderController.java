@@ -24,7 +24,7 @@ public class OrderController {
     @CrossOrigin(origins = CORS_VALIDATION_RECEIPT_URL)
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable int id) {
-        Order order= orderRepository.getReferenceById(id);
+        Order order= orderRepository.findById(id).get();
         if (order.equals(null)) {
             throw new IllegalStateException("Id not found");
         } else {
